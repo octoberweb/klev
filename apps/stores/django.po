@@ -1,0 +1,17 @@
+msgid "Stores"
+msgstr "Магазины"
+
+msgid "stores"
+msgstr "магазины"
+
+msgid "store_items"
+msgstr "магазины"
+
+msgid "store_item"
+msgstr "магазин"
+
+msgid "photos"
+msgstr "фотографии"
+
+msgid "photo"
+msgstr "фотография"

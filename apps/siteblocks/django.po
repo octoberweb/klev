@@ -1,0 +1,11 @@
+msgid "Siteblocks"
+msgstr "Блоки сайта"
+
+msgid "siteblocks"
+msgstr "блоки сайта"
+
+msgid "menu_item"
+msgstr "элемент"
+
+msgid "menu_items"
+msgstr "элементы меню"

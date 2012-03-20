@@ -1,0 +1,11 @@
+msgid "News"
+msgstr "Новости"
+
+msgid "news"
+msgstr "новости"
+
+msgid "news_items"
+msgstr "новости"
+
+msgid "news_item"
+msgstr "новость"

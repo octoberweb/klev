@@ -1,0 +1,11 @@
+msgid "Banners"
+msgstr "Баннеры"
+
+msgid "banners"
+msgstr "баннеры"
+
+msgid "banner_items"
+msgstr "баннеры"
+
+msgid "banner_item"
+msgstr "баннер"

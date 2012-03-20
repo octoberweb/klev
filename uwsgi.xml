@@ -1,0 +1,7 @@
+<uwsgi>
+    <pythonpath>/home/XXXXXX/XXXXXX/</pythonpath>
+    <pythonpath>/home/XXXXXX/</pythonpath>
+    <app mountpoint="/">
+        <script>django_wsgi</script>
+    </app>
+</uwsgi>

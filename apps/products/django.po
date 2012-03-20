@@ -1,0 +1,29 @@
+msgid "Products"
+msgstr "Товары"
+
+msgid "products"
+msgstr "товары"
+
+msgid "categories"
+msgstr "категории"
+
+msgid "category"
+msgstr "категория"
+
+msgid "subcategories"
+msgstr "подкатегории"
+
+msgid "subcategory"
+msgstr "подкатегория"
+
+msgid "brands"
+msgstr "бренды"
+
+msgid "brand"
+msgstr "бренд"
+
+msgid "product_items"
+msgstr "товары"
+
+msgid "product_item"
+msgstr "товар"
