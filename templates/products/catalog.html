@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="submenu">
+        <ul>
+            {% for category in categories %}
+                <li{% ifequal category_alias category.alias %} class="current"{% endifequal %} ><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <div class="left col">
+        
+        <div class="catalog_sort">
+            <div class="current_sort">Товары выводятся без сортировки.</div>
+            <div>Можно выводить сначала <a href="#">дешевые</a> или <a href="#">дорогие</a>, и даже <span class="sort_price_lnk">установить диапозон цен</span></div>
+        </div>
+        
+        <div class="items">
+
+            <div class="item">
+                <div class="item_l">
+                    <div class="item_img"><a href="#"><img src="/static/images/1.jpg" alt="SIMMS Куртка In-Vest Jacket L TAN" /></a><a class="item_img_fr" href="#"></a></div>
+                </div>
+                <div class="item_r">
+                    <div class="item_cat"><a href="#">Вейдерсы</a></div>
+                    <h3 class="item_name"><a href="#">SIMMS Куртка куртяшная In-Vest Jacket L TAN ололо</a><span>Simms</span></h3>
+                    <div class="item_tocart">
+                        <div class="item_tocart_price"><span>4 890</span> руб.</div>
+                        <div class="item_tocart_btn"><input type="button" /></div>
+                    </div>
+                </div>
+                <div class="cl"></div>
+            </div>
+            <div class="item">
+                <div class="item_l">
+                    <div class="item_img"><a href="#"><img src="/static/images/1.jpg" alt="SIMMS Куртка In-Vest Jacket L TAN" /></a><a class="item_img_fr" href="#"></a></div>
+                    <div class="item_topsale"></div>
+                </div>
+                <div class="item_r">
+                    <div class="item_cat"><a href="#">Вейдерсы</a></div>
+                    <h3 class="item_name"><a href="#">SIMMS Куртка In-Vest Jacket L TAN</a><span>Simms</span></h3>
+                    <div class="item_tocart">
+                        <div class="item_tocart_price"><span>4 890</span> руб.</div>
+                        <div class="item_tocart_btn"><input type="button" /></div>
+                    </div>
+                </div>
+                <div class="cl"></div>
+            </div>
+            <div class="item">
+                <div class="item_l">
+                    <div class="item_img"><a href="#"><img src="/static/images/1.jpg" alt="SIMMS Куртка In-Vest Jacket L TAN" /></a><a class="item_img_fr" href="#"></a></div>
+                    <div class="item_like"></div>
+                </div>
+                <div class="item_r">
+                    <div class="item_cat"><a href="#">Вейдерсы</a></div>
+                    <h3 class="item_name"><a href="#">SIMMS Куртка In-Vest Jacket L TAN</a><span>Simms</span></h3>
+                    <div class="item_tocart">
+                        <div class="item_tocart_price"><span>4 890</span> руб.</div>
+                        <div class="item_tocart_btn"><input type="button" /></div>
+                    </div>
+                </div>
+                <div class="cl"></div>
+            </div>
+            <div class="item">
+                <div class="item_l">
+                    <div class="item_img"><a href="#"><img src="/static/images/1.jpg" alt="SIMMS Куртка In-Vest Jacket L TAN" /></a><a class="item_img_fr" href="#"></a></div>
+                    <div class="item_oldprice"><s><span>5 400</span> руб.</s></div>
+                </div>
+                <div class="item_r">
+                    <div class="item_cat"><a href="#">Вейдерсы</a></div>
+                    <h3 class="item_name"><a href="#">SIMMS Куртка In-Vest Jacket L TAN</a><span>Simms</span></h3>
+                    <div class="item_tocart">
+                        <div class="item_tocart_price"><span>4 890</span> руб.</div>
+                        <div class="item_tocart_btn"><input type="button" /></div>
+                    </div>
+                </div>
+                <div class="cl"></div>
+            </div>
+            
+            <div class="pagination">
+                <div><strong>Страницы</strong> <a class="pag_prev" href="#">← <span>предыдущая</span></a> или <a class="pag_next" href="#"><span>следующая</span> →</a></div>
+                <div>
+                    <span class="pages"><a href="#">1</a> <a class="current" href="#">2</a> <a href="#">3</a> <a href="#">4</a></span>
+                    <span class="show_all"><a href="#">показать все товары</a> <em>(в текущей категории 134 товара)</em></span>
+                </div>
+            </div><!--/pagination-->
+        </div><!--/items-->
+    </div><!--/left-->
+    
+    <div class="right col">
+        <div class="catalog_filters">
+            <div class="filter">
+                <h2>Подкатегории</h2>
+                <ul>
+                    <li class="current"><a href="#">Все товары</a></li>
+                    <li><a href="#">Катушка байтраннер</a></li>
+                    <li><a href="#">Катушка	безынерционная</a></li>
+                    <li><a href="#">Катушка инерционная</a></li>
+                </ul>
+            </div>
+            <div class="filter">
+                <h2>Подкатегории</h2>
+                <ul>
+                    <li class="current"><a href="#">Все брэнды</a></li>
+                    <li><a href="#">Daiwa</a></li>
+                    <li><a href="#">Flamingo</a></li>
+                    <li><a href="#">Kola Salmon</a></li>
+                    <li><a href="#">Daiwa</a></li>
+                    <li><a href="#">Flamingo</a></li>
+                </ul>
+                <div class="filter_other"><a href="#">прочие производители</a></div>
+            </div>
+            <div class="filter">
+                <h2>Наличие в магазинах</h2>
+                <ul>
+                    <li class="current"><a href="#">Во всех магазинах</a></li>
+                    <li><a href="#">Клёвый Островского, 16</a></li>
+                    <li><a href="#">МАКСИ Шилова,&nbsp;100</a></li>
+                </ul>
+            </div>
+        </div><!--/catalog_filter-->
+        
+        <div class="sale">
+            <h2>Распродажа</h2>
+            <div class="sale_hits">посмотреть <a href="#">Хиты продаж</a></div>
+            <div class="sale_recomend">или <a href="#">Рекомендации</a></div>
+            <div class="sale_items">
+                <div class="item">
+                    <div class="item_l">
+                        <div class="item_img"><a href="#"><img src="/static/images/1.jpg" alt="Alivio 1000 FB" /></a><a class="item_img_fr" href="#"></a></div>
+                    </div>
+                    <div class="item_r">
+                        <h3 class="item_name"><a href="#">Alivio 1000 FB</a> <span>Simms</span></h3>
+                        <div class="item_tocart">
+                            <div class="item_tocart_price"><span>4 890</span> руб.</div>
+                            <div class="item_tocart_btn"><input type="button" /></div>
+                        </div>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+                <div class="item">
+                    <div class="item_l">
+                        <div class="item_img"><a href="#"><img src="/static/images/1.jpg" alt="SIMMS Куртка In-Vest Jacket L TAN" /></a><a class="item_img_fr" href="#"></a></div>
+                    </div>
+                    <div class="item_r">
+                        <h3 class="item_name"><a href="#">SIMMS Куртка In-Vest Jacket L TAN</a> <span>Simms</span></h3>
+                        <div class="item_tocart">
+                            <div class="item_tocart_price"><span>4 890</span> руб.</div>
+                            <div class="item_tocart_btn"><input type="button" /></div>
+                        </div>
+                    </div>
+                    <div class="cl"></div>
+                </div>
+            </div><!--/sale_items-->
+            <div class="sale_all"><a href="#">Все товары с рапродажей в «Катушки»</a></div>
+        </div>
+    </div><!--/right-->
+{% endblock %}

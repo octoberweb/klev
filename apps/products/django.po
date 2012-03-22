@@ -4,26 +4,44 @@ msgstr "Товары"
 msgid "products"
 msgstr "товары"
 
+msgid "sections"
+msgstr "разделы (классы товаров)"
+
+msgid "section"
+msgstr "раздел (класс товара)"
+
 msgid "categories"
-msgstr "категории"
+msgstr "категории (виды товаров)"
 
 msgid "category"
-msgstr "категория"
+msgstr "категория (вид товара)"
 
 msgid "subcategories"
-msgstr "подкатегории"
+msgstr "подкатегории (подвиды товаров)"
 
 msgid "subcategory"
-msgstr "подкатегория"
-
-msgid "brands"
-msgstr "бренды"
-
-msgid "brand"
-msgstr "бренд"
+msgstr "подкатегория (подвид товара)"
 
 msgid "product_items"
 msgstr "товары"
 
 msgid "product_item"
 msgstr "товар"
+
+msgid "properties"
+msgstr "свойства"
+
+msgid "property"
+msgstr "свойство"
+
+msgid "storages"
+msgstr "склады"
+
+msgid "storage"
+msgstr "склад"
+
+msgid "params"
+msgstr "параметры"
+
+msgid "param"
+msgstr "параметр"

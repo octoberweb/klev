@@ -22,7 +22,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     
     'apps.meta',
-    'apps.pages',
+    #'apps.pages',
+    'apps.products',
+    'apps.stores',
 
 
     #'south',

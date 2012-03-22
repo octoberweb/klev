@@ -11,9 +11,13 @@ from apps.utils.managers import VisibleObjects
 def file_path_Store(instance, filename):
     return os.path.join('images','store',  translify(filename).replace(' ', '_') )
 class Store(models.Model):
-    name = models.CharField(verbose_name=u'Название', max_length=100)
+    name = models.CharField(verbose_name=u'Название в каталоге', max_length=100)
+    name_footer = models.CharField(verbose_name=u'Название в подвале сайта', max_length=100)
+    name_xml = models.CharField(verbose_name=u'Название в xml', max_length=100)
     alias = models.CharField(verbose_name=u'Название En', max_length=100, unique=True)
-    route = ImageField(verbose_name=u'Схема проезда', upload_to=file_path_Store)
+    route = ImageField(verbose_name=u'Схема проезда', upload_to=file_path_Store, blank=True)
+    address = models.CharField(verbose_name=u'Адрес', max_length=100, help_text=u'Для каталога и в подвале сайта')
+    telephone = models.CharField(verbose_name=u'Телефон', max_length=100, help_text=u'Для каталога и в подвале сайта')
     description = models.TextField(verbose_name=u'Описание')
 
     order = models.IntegerField(verbose_name=u'Порядок сортировки',default=10)
@@ -38,7 +42,7 @@ class Store(models.Model):
 
 class Photo(models.Model):
     store = models.ForeignKey(Store, verbose_name=u'Магазин')
-    image = ImageField(verbose_name=u'Картинка', upload_to=file_path_Category)
+    image = ImageField(verbose_name=u'Картинка', upload_to=file_path_Store)
 
     class Meta:
         verbose_name =_(u'photo')

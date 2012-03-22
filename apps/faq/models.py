@@ -15,8 +15,8 @@ class QuestionCategory(models.Model):
     def __unicode__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return u'/faq/%s/' %self.alias
+    #def get_absolute_url(self):
+    #    return u'/faq/%s/' %self.alias
 
 class Question(models.Model):
     category = models.ForeignKey(QuestionCategory, verbose_name=u'Категория', blank=True, null=True)

@@ -13,50 +13,31 @@ import md5
 from datetime import datetime, date, timedelta
 
 from apps.utils.context_processors import custom_proc
-from apps.countries.models import Country
+from apps.products.models import Section, Category, Product, SubCategory
 
 
-def countries_view(request):
-    countries = Country.items.all()
+
+def section_view(request, section_alias=None):
+    try:
+        section = Section.objects.get(alias=section_alias)
+    except Section.DoesNotExist:
+        return HttpResponseRedirect(u'/')
+
+    if not section.show:
+        return HttpResponseRedirect(u'/')
+
+    categories = section.get_categories()
+
+
+
 
     return render_to_response(
-        'countries/countries.html',
+        'products/catalog.html',
         {
-            'countries':countries,
-            'menu_url': u'/countries/'
+            'section':section,
+            'categories':categories,
+            'section_alias':section.alias
+            #'menu_url': u'/countries/'
         },
         context_instance=RequestContext(request, processors=[custom_proc])
     )
-
-def country_view(request, country_alias=None):
-    if country_alias is None:
-        return HttpResponseRedirect('/countries/')
-    else:
-        try:
-            country = Country.objects.get(alias=country_alias)
-        except Country.DoesNotExist:
-            return HttpResponseRedirect('/countries/')
-
-        if not country.show:
-            return HttpResponseRedirect('/countries/')
-
-        country_photos = country.get_photos()
-        links = country.get_links()
-
-        all_tours = country.get_all_tours()
-        tours = all_tours.exclude(hot=True)
-        hot_tours = all_tours.filter(hot=True)
-
-        return render_to_response(
-            'countries/country.html',
-                {
-                'country':country,
-                'country_photos':country_photos,
-                'links':links,
-                'hot_tours':hot_tours,
-                'tours':tours,
-                'menu_url': u'/countries/'
-            },
-            context_instance=RequestContext(request, processors=[custom_proc])
-        )
-

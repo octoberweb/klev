@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+
+/*6-7*/
+.menu_site li, .menu li,
+.submenu li,
+.col,
+.catalog_groups li,
+.item, .item_l, .item_r,
+.news h2,
+.discounts li,
+.footer_contact,
+.sort_price_lnk,
+.filter li,
+.item_page_l, .item_page_r,
+.total_sum_in,
+.rc_dark {
+	*display:inline;
+	*zoom:1;
+}
+.sale {
+	*position:relative;
+	*zoom:1;
+}
+/*6-7*/

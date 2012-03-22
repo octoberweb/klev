@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/css/style.css" rel="stylesheet" type="text/css" />
+<!--[if lte IE 8]><link rel="stylesheet" type="text/css" media="screen" href="/static/css/ie.css" /><![endif]-->
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript" src="/static/js/script.js"></script>
+<script type="text/javascript" src="/static/js/modulargrid.js"></script>
+<title>Клёвый</title>
+</head>
+
+<body>
+<div id="bg">
+<div class="wrapper">
+
+<!--PAGE-->
+<div class="page">
+
+    <!--HEADER-->
+	<div class="header">
+		<a id="logo_box" href="/" title="Клёвый"><img id="logo" src="/static/img/logo.png" alt="Клёвый" width="231" height="86" /></a>
+		
+		<div id="boat"></div>
+		
+		<div class="menu_site">
+			<ul>
+				<li class="current"><a href="#">Интернет-магазин</a></li>
+				<li><a href="#">Прокат оборудования</a></li>
+			</ul>
+		</div><!--/menu_site-->
+		
+		<div class="menu_auth"><a class="auth_lnk" href="#">Вход</a> или <a href="#">регистрация</a></div>
+		
+		<div class="menu_shop">
+			<ul>
+				<li><a href="#">Магазины</a></li>
+				<li><a href="#">Дисконты и акции</a></li>
+			</ul>
+		</div><!--/menu_shop-->
+		
+		<div class="search">
+			<form class="search_form" method="post" action="">
+				<div class="search_input"><input type="text" placeholder="Поиск в каталоге товаров" /></div>
+				<div class="search_submit"><input type="submit" value="Найти" /></div>
+				<div class="cl"></div>
+			</form>
+			<div class="search_example">Например, <span>навигатор Garmin</span></div>
+		</div><!--/search-->
+		
+		<div class="header_cart">
+			<div class="header_cart_h">Ваша корзина пока пуста</div>
+			<div class="header_cart_new">Новое поступление пуховых костюмов от <a href="#">Norfin Titan</a> и <a href="#">Polar</a></div>
+
+			<!--
+			<div class="header_cart_h">В корзине 4 товара</div>
+			<div class="header_cart_sum">На сумму в 5649 рублей</div>
+			<div class="header_cart_btn"><div class="btn"><a href="#">Оформить заказ</a></div></div>
+			-->
+			<div id="anchor"></div>
+		</div><!--/cart-->
+		
+				
+		<div class="menu">
+            <ul>
+                {% for section in sections %}
+                    <li{% ifequal section_alias section.alias  %} class="current"{% endifequal %}>
+                        <a href="{{ section.get_absolute_url }}"><img src="{{ section.image.url }}" width="106" height="122" alt="{{ section.name|safe }}" />
+                            <span>{{ section.name|safe }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+			</ul>
+		</div><!--/menu-->
+		
+	</div>
+    <!--/HEADER-->
+
+
+    <!--MAIN-->
+	<div class="main">
+    {% block main %}
+    {% endblock %}
+    </div>
+    <!--/MAIN-->
+	
+	
+    <!--FOOTER-->
+    <div class="footer">
+    	<div class="footer_contacts">
+            {% for store in stores %}
+                <div class="footer_contact">
+                    <address><span>{{ store.address }}</span> ({{ store.name_footer }})</address>
+                    <div class="footer_tel">{{ store.telephone }}</div>
+                </div>
+            {% endfor %}
+    	</div><!--/footer_contacts-->
+    	
+		<a id="madein" title="Разработка сайта — студия OctoberWeb" href="http://octoberweb.ru/"><img id="octoberweb" alt="Разработка сайта — студия OctoberWeb" src="/static/img/octoberweb.png" width="32" height="32"/>разработка сайта <span>OctoberWeb</span></a>
+    </div>
+    <!--/FOOTER-->
+    
+</div>
+<!--/PAGE-->
+
+</div><!--/wrapper-->
+</div>
+</body>
+</html>
