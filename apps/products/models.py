@@ -124,7 +124,7 @@ def file_path_Product(instance, filename):
 class Product(models.Model):
     subcategory = models.ForeignKey(SubCategory, verbose_name=u'Подкатегория')
     name = models.CharField(verbose_name=u'Название', max_length=100)
-    xml_id = models.CharField(verbose_name=u'Идентификатор в xml', max_length=100, unique=True)
+    xml_id = models.CharField(verbose_name=u'ID в xml', max_length=100, unique=True)
     description = models.TextField(verbose_name=u'Описание', blank=True)
     image = ImageField(verbose_name=u'Картинка', upload_to=file_path_Product,blank=True)
     keywords = models.CharField(max_length=400, verbose_name=u'Ключевые слова')
@@ -150,6 +150,46 @@ class Product(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return u'/product/%d/' %self.id
+
+    def get_price(self):
+        price = self.price
+        value = u'%s' %price
+        if price._isinteger():
+            value = u'%s' %value[:len(value)-3]
+            count = 3
+        else:
+            count = 6
+
+        if len(value)>count:
+            ends = value[len(value)-count:]
+            starts = value[:len(value)-count]
+
+            return u'%s %s' %(starts, ends)
+        else:
+            return value
+
+    def get_old_price(self):
+        price = self.old_price
+        value = u'%s' %price
+        if price._isinteger():
+            value = u'%s' %value[:len(value)-3]
+            count = 3
+        else:
+            count = 6
+
+        if len(value)>count:
+            ends = value[len(value)-count:]
+            starts = value[:len(value)-count]
+
+            return u'%s %s' %(starts, ends)
+        else:
+            return value
+
+    def get_params(self):
+        return self.param_set.select_related().all()
 
 
 class Param(models.Model):

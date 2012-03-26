@@ -14,14 +14,14 @@ class Banners(models.Model):
     name = models.CharField(max_length=200, verbose_name=u'Название')
     banner_file = models.FileField(upload_to=file_path, verbose_name=u'Файл')
     href = models.URLField(verbose_name=u'Ссылка', blank=True)
-    banner_width = models.CharField(max_length=4,verbose_name=u'Ширина', help_text=u'Ширина баннера справа: 150px. Ширина нижнего баннера: 500px.')
-    banner_height = models.CharField(max_length=4, verbose_name=u'Высота', help_text=u'Высота баннера справа: 220px. Высота нижнего баннера: 72px.')
+    banner_width = models.CharField(max_length=4,verbose_name=u'Ширина', help_text=u'Ширина баннера справа: 264px.')
+    banner_height = models.CharField(max_length=4, verbose_name=u'Высота', help_text=u'Высота баннера справа: 360px.')
 
     #left = models.BooleanField(verbose_name=u'Баннер под меню', default=False)
     #right = models.BooleanField(verbose_name=u'Баннер на главной справа', default=False)
     flash = models.BooleanField(verbose_name=u'Flash', default=False)
     show = models.BooleanField(verbose_name=u'Отображать', default=True)
-    order = models.IntegerField(verbose_name=u'Порядок',max_length=3, default=10)
+    #order = models.IntegerField(verbose_name=u'Порядок',max_length=3, default=10)
 
     objects = models.Manager() # The default manager.
     items = VisibleObjects() # The visible objects manager.

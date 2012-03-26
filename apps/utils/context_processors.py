@@ -23,5 +23,6 @@ def custom_proc(request):
         'current_url':current_url,
         'sections':sections,
         'stores':stores,
+        'sessionid': request.session.session_key,
 
     }

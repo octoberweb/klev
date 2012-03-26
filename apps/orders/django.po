@@ -1,0 +1,11 @@
+msgid "store"
+msgstr "магазин"
+
+msgid "Store"
+msgstr "Магазин"
+
+msgid "cart"
+msgstr "корзина"
+
+msgid "carts"
+msgstr "корзина"

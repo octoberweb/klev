@@ -1,0 +1,15 @@
+    <div class="header_cart">
+
+        {% if not is_empty %}
+            <div class="header_cart_h">В корзине {{ cart_products_count }} {{ cart_products_text }}</div>
+            <div class="header_cart_sum">На сумму в {{ cart_total }} руб.</div>
+            <div class="header_cart_btn"><a class="btn_green" href="/cart/">Оформить заказ</a></div>
+        {% else %}
+            <div class="header_cart_h">{{ cart_get_products_count }}Ваша корзина пока пуста</div>
+            <div class="header_cart_new">ОТКУДА БРАТЬ ТЕКСТ  Новое поступление пуховых костюмов от <a href="#">Norfin Titan</a> и <a href="#">Polar</a></div>
+        {% endif %}
+
+
+
+        <div id="anchor"></div>
+    </div><!--/cart-->

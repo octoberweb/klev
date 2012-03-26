@@ -1,0 +1,7 @@
+    <div class="submenu">
+        <ul>
+            {% for category in categories %}
+                <li{% ifequal category_alias category.alias %} class="current"{% endifequal %} ><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>

@@ -70,10 +70,10 @@ class ParamInline(admin.TabularInline):
     model = Param
 
 class ProductAdmin(AdminImageMixin, admin.ModelAdmin):
-    list_display = ('id','xml_id', 'name', 'subcategory', 'price','old_price','recomended','top', 'order','show',)
+    list_display = ('id','xml_id', 'name', 'subcategory','storage', 'price','old_price','recomended','top', 'order','show',)
     list_display_links = ('id','xml_id','name',)
     list_editable = ('order','show',)
-    list_filter = ('show','recomended','top', 'subcategory', )
+    list_filter = ('show','recomended','top','storage', 'subcategory', )
     search_fields = ['xml_id', 'name','subcategory__name', 'keywords' ]
     inlines = [ParamInline]
     #form = ModelAdminForm

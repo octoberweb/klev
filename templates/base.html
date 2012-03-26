@@ -1,3 +1,4 @@
+{% load orders_extras %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -48,18 +49,7 @@
 			<div class="search_example">Например, <span>навигатор Garmin</span></div>
 		</div><!--/search-->
 		
-		<div class="header_cart">
-			<div class="header_cart_h">Ваша корзина пока пуста</div>
-			<div class="header_cart_new">Новое поступление пуховых костюмов от <a href="#">Norfin Titan</a> и <a href="#">Polar</a></div>
-
-			<!--
-			<div class="header_cart_h">В корзине 4 товара</div>
-			<div class="header_cart_sum">На сумму в 5649 рублей</div>
-			<div class="header_cart_btn"><div class="btn"><a href="#">Оформить заказ</a></div></div>
-			-->
-			<div id="anchor"></div>
-		</div><!--/cart-->
-		
+        {% get_cart user sessionid %}
 				
 		<div class="menu">
             <ul>

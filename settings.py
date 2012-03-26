@@ -23,8 +23,14 @@ INSTALLED_APPS = (
     
     'apps.meta',
     #'apps.pages',
+    'apps.utils',
+    'apps.pagination',
     'apps.products',
     'apps.stores',
+    'apps.news',
+    'apps.banners',
+    'apps.orders',
+
 
 
     #'south',

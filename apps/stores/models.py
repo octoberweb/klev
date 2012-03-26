@@ -13,7 +13,7 @@ def file_path_Store(instance, filename):
 class Store(models.Model):
     name = models.CharField(verbose_name=u'Название в каталоге', max_length=100)
     name_footer = models.CharField(verbose_name=u'Название в подвале сайта', max_length=100)
-    name_xml = models.CharField(verbose_name=u'Название в xml', max_length=100)
+    #name_xml = models.CharField(verbose_name=u'Название в xml', max_length=100)
     alias = models.CharField(verbose_name=u'Название En', max_length=100, unique=True)
     route = ImageField(verbose_name=u'Схема проезда', upload_to=file_path_Store, blank=True)
     address = models.CharField(verbose_name=u'Адрес', max_length=100, help_text=u'Для каталога и в подвале сайта')

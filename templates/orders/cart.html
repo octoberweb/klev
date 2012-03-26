@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block main %}
+		<div class="cart_page">
+            {% if is_empty %}
+                <h2 class="rc_dark">Ваша корзина пока пуста<div class="rc_dark_arr"></div></h2>
+            {% else %}
+                <h2 class="rc_dark">Ваша корзина<div class="rc_dark_arr"></div></h2>
+                <div class="cart_table">
+                    <table>
+                        {% for item in cart_products %}
+                            <tr>
+                                <td class="cart_item">
+                                    <div class="item">
+                                        <div class="item_l">
+                                            <div class="item_img">
+                                                <a href="#"><img src="/static/images/1.jpg" alt="SIMMS Куртка In-Vest Jacket L TAN" /></a>
+                                                <a class="item_img_fr" href="#"></a>
+                                            </div>
+                                        </div>
+                                        <div class="item_r">
+                                            <div class="item_cat"><a href="#">{{ item.product.subcategory.name }}</a></div>
+                                            <h3 class="item_name"><a href="{{ item.product.get_absolute_url }}">{{ item.product.name }}</a><span>Simms</span></h3>
+                                        </div>
+                                        <div class="cl"></div>
+                                    </div>
+                                </td>
+                                <td class="cart_price"><span>{{ item.product.get_price }}</span> руб.</td>
+                                <td class="cart_qty"><div>{{ item.count }} шт.</div></td>
+                                <td class="cart_sum"><span>{{ item.get_str_total }}</span> руб.</td>
+                                <td class="cart_del delete_product_from_cart"><img src="/static/img/del.png" alt="X" /><input type="hidden" value="{{ item.id }}" class="cart_product_id"></td>
+                            </tr>
+                        {% endfor %}
+
+                        <tr>
+                            <td colspan="3"></td>
+                            <td class="cart_sum">
+                                <div class="total_sum_in"><span class="cart_total">Итого:</span> <span>4 890</span> руб.</div>
+                                <div><input type="submit" class="btn_green" value="Оформить покупку" /></div>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div><!--/cart_table-->
+            {% endif %}
+			
+			<div class="left">
+				<div class="discounts">
+					<h2>Все товары со скидкой</h2>
+					<div class="discounts_qty">всего 1206 товаров</div>
+					<ul>
+						<li><a href="#">Рыбалка</a></li>
+						<li><a href="#">Печи, камины, бани</a></li>
+						<li><a href="#">Пикник</a></li>
+						<li><a href="#">Одежда и обувь</a></li>
+						<li><a href="#">Туристическое снаряжение</a></li>
+						<li><a href="#">Лодки и моторы</a></li>
+					</ul>
+				</div><!--/discounts-->
+			</div>
+		</div><!--/cart_page-->
+
+{% endblock %}

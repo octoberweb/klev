@@ -1,0 +1,21 @@
+{% if banner %}
+    <div class="specials">
+        <div class="special">
+            {% if banner.flash %}
+                <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="100%" height="100%" align="middle" id="fl">
+                    <param name="allowScriptAccess" value="sameDomain" />
+                    <param name="allowFullScreen" value="false" />
+                    <param name="movie" value="{{ banner.get_src_file }}" />
+                    <param name="quality" value="high" />
+                    <param name="bgcolor" value="#ffffff" />
+                    <param name="SCALE" value="exactfit" />
+                    <embed src="{{ banner.get_src_file }}" width="{{ banner.banner_width }}px" height="{{ banner.banner_height }}px" align="middle" quality="high" bgcolor="#ffffff" name="Zanaves Blue" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://get.adobe.com/ru/flashplayer/" scale="exactfit" />
+                </object>
+            {% else %}
+                <a href="{{ banner.href }}" target="_blank">
+                    <img  width="{{ banner.banner_width }}px" height="{{ banner.banner_height }}px" src="{{ banner.get_src_file }}"/>
+                </a>
+            {% endif %}
+        </div>
+    </div><!--/specials-->
+{% endif %}

@@ -1,0 +1,28 @@
+{% if news %}
+    {% load thumbnail %}
+
+    <div class="news">
+        <h2 class="rc_dark">Новости<div class="rc_dark_arr"></div></h2>
+        {% for item in news %}
+            <div class="new">
+                <div class="new_img">
+                    {% thumbnail item.image '68x68' crop="center" as im %}
+                        <img src="{{ im.url }}" alt="" width="68" height="68" />
+                    {% endthumbnail %}
+                    <div class="new_img_fr"></div>
+                </div>
+                <h3 class="new_h">{{ item.header }}</h3>
+                <div class="new_date">{{ item.pub_date|date:"j E Y" }}</div>
+                <div class="new_text">
+                    {{ item.description|safe }}
+                    {% if item.has_full %}
+                        <p><a href="{{ item.get_absolute_url }}">Во всех подробностях</a></p>
+                    {% endif %}
+                </div>
+                {% if not forloop.last %}
+                    <div class="cl"></div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div><!--/news-->
+{% endif %}

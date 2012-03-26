@@ -6,9 +6,22 @@ from apps.utils.context_processors import custom_proc
 from django.conf import settings
 
 def index(request):
+
+    sale_products = Product.items.exclude(old_price__isnull=True)
+    sale_products_count = sale_products.count()
+
+    sections_id = sale_products.values_list('subcategory__category__section', flat=True)
+
+    sale_sections = Section.items.filter(id__in=sections_id)
+
+    sale_products = sale_products.order_by('?')[:12]
+
     return render_to_response(
         'index.html',
-            {
+        {
+            'sale_products':sale_products,
+            'sale_products_count':sale_products_count,
+            'sale_sections':sale_sections
         },
         context_instance=RequestContext(request, processors=[custom_proc])
     )
@@ -169,6 +182,8 @@ def import_xml(request):
             product.price = product_price
             if product_old_price:
                 product_old_price = Decimal(product_old_price).quantize(Decimal(10) ** -2)
+                product.old_price = product_old_price
+            else:
                 product.old_price = product_old_price
 
             product.storage = storage

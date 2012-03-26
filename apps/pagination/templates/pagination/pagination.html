@@ -1,0 +1,34 @@
+{% if is_paginated %}
+    {% load i18n pytils_numeral %}
+
+    <div class="pagination">
+        <div>
+            <strong>Страницы</strong>
+            {% if page_obj.has_previous %}
+                <a class="pag_prev" href="?page={{ page_obj.previous_page_number }}{{ getvars }}{{ hashtag }}">
+                    ← <span>предыдущая</span>
+                </a>
+            {% endif %}
+            {% if page_obj.has_next %}
+                &nbsp;<a class="pag_next" href="?page={{ page_obj.next_page_number }}{{ getvars }}{{ hashtag }}"><span>следующая</span> →</a>
+            {% endif %}
+        </div>
+
+        <div>
+            <span class="pages">
+            {% for page in pages %}
+                {% if page %}
+                    {% ifequal page page_obj.number %}
+                        <a class="current" href="?page={{ page }}{{ getvars }}{{ hashtag }}">{{ page }}</a>
+                    {% else %}
+                        <a href="?page={{ page }}{{ getvars }}{{ hashtag }}">{{ page }}</a>
+                    {% endifequal %}
+                {% else %}
+                    ...
+                {% endif %}
+            {% endfor %}
+            </span>
+            <span class="show_all"><a href="#">показать все товары</a> <em>(в текущей категории {{ objects_count }} товар{{ objects_count|choose_plural:',а,ов' }})</em></span>
+        </div>
+    </div><!--/pagination-->
+{% endif %}

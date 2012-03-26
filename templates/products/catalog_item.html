@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% load pagination_tags products_extras %}
+
+{% block main %}
+    {% include 'products/submenu_categories.html' %}
+		
+		<div class="left col">
+			<div class="item_page">
+				<div class="item_page_l">
+					<div class="item_img_big"><img src="/static/images/4.jpg" alt="" /></div>
+				</div>
+				<div class="item_page_r">
+					<div class="item_cat"><a href="#">{{ product.subcategory.name }}</a></div>
+					<h3 class="item_name"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a><span>Simms</span></h3>
+					<div class="item_tocart">
+						<div class="item_tocart_price"><span>{{ product.get_price }}</span> руб.</div>
+						<div class="item_tocart_btn"><input type="button" /></div>
+					</div>
+					<div class="cl"></div>
+					
+					<div class="item_des text">
+						{{ product.description|safe }}
+					</div>
+
+                    {% if params %}
+                        <div class="item_params">
+                            <table>
+                                {% for param in params %}
+                                    <tr>
+                                        <td class="param_name">{{ param.property.name }}</td>
+                                        <td class="param_val">{{ param.value }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div><!--/item_params-->
+                    {% endif %}
+
+				</div><!--/item_page_r-->
+				
+				<div class="similar_items">
+					<h2>Похожие товары</h2>
+                    {% for product in similar_products %}
+                        {% get_product_html product %}
+                    {% endfor %}
+				</div><!--/similar_items-->
+			</div><!--/item_page-->
+			
+		</div><!--/left-->
+		
+		<div class="right col">
+			<div class="catalog_filters">
+				<div class="filter">
+					<h2>Подкатегории</h2>
+					<ul>
+						<li class="current"><a href="#">Все товары</a></li>
+						<li><a href="#">Катушка байтраннер</a></li>
+						<li><a href="#">Катушка	безынерционная</a></li>
+						<li><a href="#">Катушка инерционная</a></li>
+					</ul>
+				</div>
+				<div class="filter">
+					<h2>Подкатегории</h2>
+					<ul>
+						<li class="current"><a href="#">Все брэнды</a></li>
+						<li><a href="#">Daiwa</a></li>
+						<li><a href="#">Flamingo</a></li>
+						<li><a href="#">Kola Salmon</a></li>
+						<li><a href="#">Daiwa</a></li>
+						<li><a href="#">Flamingo</a></li>
+					</ul>
+					<div class="filter_other"><a href="#">прочие производители</a></div>
+				</div>
+				<div class="filter">
+					<h2>Наличие в магазинах</h2>
+					<ul>
+						<li class="current"><a href="#">Во всех магазинах</a></li>
+						<li><a href="#">Клёвый Островского, 16</a></li>
+						<li><a href="#">МАКСИ Шилова,&nbsp;100</a></li>
+					</ul>
+				</div>
+			</div><!--/catalog_filter-->
+			
+		</div><!--/right-->
+{% endblock %}

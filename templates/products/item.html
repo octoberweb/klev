@@ -1,0 +1,25 @@
+    <div class="item">
+        <div class="item_l">
+            <div class="item_img">
+                <a href="{{ product.get_absolute_url }}">
+                    <img src="/static/images/1.jpg" alt="SIMMS Куртка In-Vest Jacket L TAN" />
+                </a>
+                <a class="item_img_fr" href="{{ product.get_absolute_url }}"></a>
+            </div>
+            {% if product.old_price %}
+                <div class="item_oldprice"><s><span>{{ product.get_old_price }}</span> руб.</s></div>
+            {% endif %}
+
+        </div>
+        <div class="item_r">
+            {% if product_category %}
+                <div class="item_cat"><a href="#">{{ product.subcategory.name }}</a></div>
+            {% endif %}
+            <h3 class="item_name"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a><span>Simms</span></h3>
+            <div class="item_tocart">
+                <div class="item_tocart_price"><span>{{ product.get_price }}</span> руб.</div>
+                <div class="item_tocart_btn add_product_to_cart"><input type="button" /><input type="hidden" value="{{ product.id }}" class="product_id"></div>
+            </div>
+        </div>
+        <div class="cl"></div>
+    </div>
