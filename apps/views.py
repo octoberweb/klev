@@ -35,7 +35,7 @@ from pytils.translit import translify
 def import_xml(request):
     try:
         #doc = ET.parse(u'%s/catalog.xml'%settings.ROOT_PATH)
-        doc = ET.parse(u'/home/antonio/!!!PyCharm2!!!/klev/catalog.xml')
+        doc = ET.parse(u'/home/antonio/!!!PyCharm2!!!/klev/catalog_full.xml')
     except IOError:
         return HttpResponse(u'nofile')
 
@@ -83,7 +83,10 @@ def import_xml(request):
             prop_list = []
             for value_prop in values_prop:
                 prop_ID = unicode(value_prop.attrib[u'ИдентификаторСвойства']).strip()
-                value = unicode(value_prop.attrib[u'Значение']).strip()
+                try:
+                    value = unicode(value_prop.attrib[u'Значение']).strip()
+                except KeyError:
+                    continue
                 if prop_ID == u'00003': #Вид товара (Категория)
                     category_value = value
                 elif prop_ID == u'Ц0070': #Класс товара (Раздел)
@@ -174,7 +177,10 @@ def import_xml(request):
 
             presence = proposal.find(u'Наличие')
 
-            storage_xml = unicode(presence.attrib[u'Склад']).strip()
+            try:
+                storage_xml = unicode(presence.attrib[u'Склад']).strip()
+            except (KeyError, AttributeError):
+                continue
 
             try:
                 storage = Storage.objects.get(name=storage_xml)
@@ -192,7 +198,10 @@ def import_xml(request):
 
             product.storage = storage
             product.count = product_count
-            product.save()
+            try:
+                product.save()
+            except ValueError:
+                continue
 
 
         return HttpResponse('good')

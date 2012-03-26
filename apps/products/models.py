@@ -132,11 +132,11 @@ def file_path_Product(instance, filename):
     return os.path.join('images','product',  translify(filename).replace(' ', '_') )
 class Product(models.Model):
     subcategory = models.ForeignKey(SubCategory, verbose_name=u'Подкатегория')
-    name = models.CharField(verbose_name=u'Название', max_length=100)
+    name = models.CharField(verbose_name=u'Название', max_length=400)
     xml_id = models.CharField(verbose_name=u'ID в xml', max_length=100, unique=True)
     description = models.TextField(verbose_name=u'Описание', blank=True)
     image = ImageField(verbose_name=u'Картинка', upload_to=file_path_Product,blank=True)
-    keywords = models.CharField(max_length=400, verbose_name=u'Ключевые слова')
+    keywords = models.TextField(verbose_name=u'Ключевые слова')
     price = models.DecimalField(verbose_name=u'Цена', decimal_places=2, max_digits=10, blank=True, null=True)
     old_price = models.DecimalField(verbose_name=u'Старая цена', decimal_places=2, max_digits=10, blank=True, null=True)
     recomended = models.BooleanField(verbose_name=u'Рекомендован', default=False)
