@@ -13,7 +13,7 @@
         </div>
         <div class="item_r">
             {% if product_category %}
-                <div class="item_cat"><a href="#">{{ product.subcategory.name }}</a></div>
+                <div class="item_cat"><a href="{{ product.subcategory.get_absolute_url }}">{{ product.subcategory.name }}</a></div>
             {% endif %}
             <h3 class="item_name"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a><span>Simms</span></h3>
             <div class="item_tocart">

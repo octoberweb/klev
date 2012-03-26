@@ -41,7 +41,9 @@ class Cart(models.Model):
     def get_total(self):
         sum = 0
         for cart_product in self.cartproduct_set.select_related().all():
-            sum += cart_product.count * cart_product.product.price
+            price = cart_product.product.price
+            if price:
+                sum += cart_product.count * price
         return sum
 
     def get_str_total(self):

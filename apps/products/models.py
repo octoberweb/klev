@@ -12,6 +12,8 @@ from apps.utils.managers import VisibleObjects
 class Property(models.Model):
     xml_id = models.CharField(verbose_name=u'Идентификатор', max_length=100, blank=True)
     name = models.CharField(verbose_name=u'Наименование', max_length=400)
+    alias = models.CharField(verbose_name=u'Алиас', max_length=400)
+
 
     class Meta:
         verbose_name =_(u'property')
@@ -19,6 +21,10 @@ class Property(models.Model):
 
     def __unicode__(self):
         return u'%s, %s ' %(self.xml_id, self.name)
+
+    def get_values(self, products):
+        return self.param_set.distinct().select_related().filter(product__in=products)
+
 
 def file_path_Section(instance, filename):
     return os.path.join('images','section',  translify(filename).replace(' ', '_') )
@@ -98,8 +104,8 @@ class SubCategory(models.Model):
     def __unicode__(self):
         return u'%s | %s' %(self.category.name, self.name)
 
-    #def get_absolute_url(self):
-    #    return u'/countries/%s/' %self.alias
+    def get_absolute_url(self):
+        return u'%s?subcategory=%s' %(self.category.get_absolute_url(), self.id)
 
     def get_products(self):
         return self.product_set.filter(show=True)
@@ -118,6 +124,9 @@ class Storage(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def get_absolute_url(self):
+            return u'?storage=%d' %self.id
 
 def file_path_Product(instance, filename):
     return os.path.join('images','product',  translify(filename).replace(' ', '_') )
@@ -149,13 +158,15 @@ class Product(models.Model):
         ordering = ['-order', 'name']
 
     def __unicode__(self):
-        return self.name
+        return u'ID:%s, XML_ID:%s, %s' %(self.id, self.xml_id, self.name)
 
     def get_absolute_url(self):
         return u'/product/%d/' %self.id
 
     def get_price(self):
         price = self.price
+        if not price:
+            return u'-----'
         value = u'%s' %price
         if price._isinteger():
             value = u'%s' %value[:len(value)-3]

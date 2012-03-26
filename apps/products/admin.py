@@ -24,7 +24,7 @@ class InfoInline(admin.TabularInline):
 '''
 
 class PropertyAdmin(AdminImageMixin, admin.ModelAdmin):
-    list_display = ('id','xml_id','name',)
+    list_display = ('id','xml_id','name','alias',)
     list_display_links = ('id','xml_id',)
     search_fields = ('xml_id','name',)
 

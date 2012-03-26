@@ -25,35 +25,33 @@
     
     <div class="right col">
         <div class="catalog_filters">
-            <div class="filter">
-                <h2>Подкатегории</h2>
-                <ul>
-                    <li class="current"><a href="#">Все товары</a></li>
-                    <li><a href="#">Катушка байтраннер</a></li>
-                    <li><a href="#">Катушка	безынерционная</a></li>
-                    <li><a href="#">Катушка инерционная</a></li>
-                </ul>
-            </div>
-            <div class="filter">
-                <h2>Подкатегории</h2>
-                <ul>
-                    <li class="current"><a href="#">Все брэнды</a></li>
-                    <li><a href="#">Daiwa</a></li>
-                    <li><a href="#">Flamingo</a></li>
-                    <li><a href="#">Kola Salmon</a></li>
-                    <li><a href="#">Daiwa</a></li>
-                    <li><a href="#">Flamingo</a></li>
-                </ul>
-                <div class="filter_other"><a href="#">прочие производители</a></div>
-            </div>
-            <div class="filter">
-                <h2>Наличие в магазинах</h2>
-                <ul>
-                    <li class="current"><a href="#">Во всех магазинах</a></li>
-                    <li><a href="#">Клёвый Островского, 16</a></li>
-                    <li><a href="#">МАКСИ Шилова,&nbsp;100</a></li>
-                </ul>
-            </div>
+            {% if subcategories %}
+                <div class="filter">
+                    <h2>Подкатегории</h2>
+                    <ul>
+                        {% getvars subcategories 'subcategory' %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            {% if properties %}
+                {% for property in properties %}
+                    <div class="filter">
+                        <h2>{{ property.name }}</h2>
+                        {% getvars_properties property all_products property.alias %}
+                        </div>
+                {% endfor %}
+            {% endif %}
+
+            {% if storages %}
+                <div class="filter">
+                    <h2>Наличие в магазинах</h2>
+                    <ul>
+                        {% getvars storages 'storage' %}
+                    </ul>
+                </div>
+            {% endif %}
+
         </div><!--/catalog_filter-->
         
         <div class="sale">

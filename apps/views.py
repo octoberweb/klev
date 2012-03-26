@@ -30,6 +30,7 @@ def index(request):
 from xml.etree import ElementTree as ET
 from apps.products.models import Property, Product, Section, Category, SubCategory, Param,Storage
 from decimal import Decimal, InvalidOperation
+from pytils.translit import translify
 
 def import_xml(request):
     try:
@@ -56,9 +57,12 @@ def import_xml(request):
                 try:
                     prop = Property.objects.get(xml_id=prop_ID)
                 except Property.DoesNotExist:
+                    prop_alias = prop_name.replace(',','').replace(' ','_').lower()
+                    prop_alias = translify(prop_alias)
                     Property.objects.create(
                         xml_id=prop_ID,
-                        name=prop_name
+                        name=prop_name,
+                        alias=prop_alias
                     )
 
         products = calalog.findall(u'Товар')
