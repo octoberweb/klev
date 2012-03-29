@@ -128,6 +128,18 @@ def catalog_view(request, section_alias=None, category_alias=None):
     recomended_products = all_products.filter(recomended=True)[:3]
 
     products_count = products.count()
+
+    all = False
+    if 'all' in getvars:
+        all = getvars['all']
+        if all != u'all':
+            all = False
+        else:
+            if products_count > 150:
+                all = False
+
+
+
     return render_to_response(
         'products/catalog.html',
         {
@@ -145,7 +157,8 @@ def catalog_view(request, section_alias=None, category_alias=None):
             'products_count':products_count,
             'subcategories':subcategories,
             'storages':storages,
-            'properties':properties
+            'properties':properties,
+            'all':all
 
             #'menu_url': u'/countries/'
         },

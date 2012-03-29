@@ -67,7 +67,7 @@ def getvars_properties(context, property, products, property_alias):
     }
 
 @register.simple_tag(takes_context=True)
-def getvars_simple(context,param, direction):
+def getvars_simple(context,param, value):
     if 'request' in context:
         getvars = context['request'].GET.copy()
         if param in getvars:
@@ -82,7 +82,7 @@ def getvars_simple(context,param, direction):
         else:
             getvars = u''
 
-        return u'?%s=%s%s' %(param, direction, getvars)
+        return u'?%s=%s%s' %(param, value, getvars)
     else:
         return  u''
 

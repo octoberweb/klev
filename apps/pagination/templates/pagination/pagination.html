@@ -1,5 +1,5 @@
 {% if is_paginated %}
-    {% load i18n pytils_numeral %}
+    {% load i18n pytils_numeral products_extras %}
 
     <div class="pagination">
         <div>
@@ -28,7 +28,7 @@
                 {% endif %}
             {% endfor %}
             </span>
-            <span class="show_all"><a href="#">показать все товары</a> <em>(в текущей категории {{ objects_count }} товар{{ objects_count|choose_plural:',а,ов' }})</em></span>
+            <span class="show_all"><a href="{% getvars_simple 'all' 'all' %}">показать все товары</a> <em>(в текущей категории {{ objects_count }} товар{{ objects_count|choose_plural:',а,ов' }})</em></span>
         </div>
     </div><!--/pagination-->
 {% endif %}

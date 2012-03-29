@@ -129,6 +129,20 @@ $(function(){
                         $('.catalog_groups ul li').removeClass('current').removeClass('rc_dark');
                         $('.catalog_groups ul li .rc_dark_arr').remove();
                         el.parent().addClass('current').addClass('rc_dark').append('<div class="rc_dark_arr"></div>');
+
+                        $('.discounts').hide();
+                        switch (type_el){
+                            case 'sale':
+                                $('.sale_products_index').show();
+                                break;
+                            case 'top':
+                                $('.top_products_index').show();
+                                break;
+                            case 'recomended':
+                                $('.recomended_products_index').show();
+                                break;
+
+                        }
                     },
                     error:function(data){
 

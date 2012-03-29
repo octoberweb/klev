@@ -27,12 +27,17 @@
         </div>
         
         <div class="items">
-            {% autopaginate products 10 %}
+            {% if not all %}
+                {% autopaginate products 10 %}
+            {% endif %}
+
             {% for product in products %}
                 {% get_product_html product %}
             {% endfor %}
 
-            {% paginate products_count %}
+            {% if not all %}
+                {% paginate products_count %}
+            {% endif %}
 
         </div><!--/items-->
     </div><!--/left-->

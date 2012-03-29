@@ -212,7 +212,8 @@ def paginate(context,objects_count=None,  window=DEFAULT_WINDOW, hashtag=''):
             'paginator': paginator,
             'hashtag': hashtag,
             'is_paginated': paginator.count > paginator.per_page,
-            'objects_count':objects_count
+            'objects_count':objects_count,
+            'request':context['request']
         }
         if 'request' in context:
             getvars = context['request'].GET.copy()

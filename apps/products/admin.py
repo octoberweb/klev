@@ -4,7 +4,7 @@ from django.contrib import admin
 from django import forms
 from apps.utils.widgets import Redactor
 
-from apps.products.models import Section, Property, Category, SubCategory,Product, Param,Brand
+from apps.products.models import Section, Property, Category, SubCategory,Product, Param,Brand, Photo, ImportXML
 from sorl.thumbnail.admin import AdminImageMixin
 '''
 #--Виджеты jquery Редактора
@@ -76,6 +76,9 @@ admin.site.register(Brand, BrandAdmin)
 
 class ParamInline(admin.TabularInline):
     model = Param
+
+class PhotoInline(admin.TabularInline):
+    model = Photo
 #--Виджеты jquery Редактора
 class ProductAdminForm(forms.ModelForm):
     description = forms.CharField(widget=Redactor(attrs={'cols': 110, 'rows': 20}), required=False)
@@ -90,7 +93,13 @@ class ProductAdmin(AdminImageMixin, admin.ModelAdmin):
     list_editable = ('recomended','top','order','show',)
     list_filter = ('show','recomended','top','storage', 'subcategory', )
     search_fields = ('xml_id', 'name','subcategory__name', 'keywords' ,)
-    inlines = [ParamInline]
+    inlines = [ParamInline,PhotoInline]
     form = ProductAdminForm
 
 admin.site.register(Product, ProductAdmin)
+
+class ImportXMLAdmin(admin.ModelAdmin):
+    list_display = ('id','pub_date', 'file',)
+    list_display_links = ('id','pub_date',)
+
+admin.site.register(ImportXML, ImportXMLAdmin)

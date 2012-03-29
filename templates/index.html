@@ -14,15 +14,34 @@
 
 			{% include 'products/product_items.html' %}
 
-			<div class="discounts">
+			<div class="discounts sale_products_index">
 				<h2>Все товары со скидкой</h2>
 				<div class="discounts_qty">всего {{ sale_products_count }} товар{{ sale_products_count|choose_plural:',а,ов' }}</div>
                 <ul>
                     {% for section in sale_sections %}
-                        <li><a href="{{ section.get_absolute_url }}">{{ section.name|safe }}</a></li>
+                        <li><a href="{{ section.get_absolute_url }}?rasprodazha=Распродажа">{{ section.name|safe }}</a></li>
                     {% endfor %}
 				</ul>
 			</div><!--/discounts-->
+            <div class="discounts top_products_index" style="display: none;">
+				<h2>Все хиты продаж</h2>
+				<div class="discounts_qty">всего {{ top_products_count }} товар{{ top_products_count|choose_plural:',а,ов' }}</div>
+                <ul>
+                    {% for section in top_sections %}
+                        <li><a href="{{ section.get_absolute_url }}?top_sale=all">{{ section.name|safe }}</a></li>
+                    {% endfor %}
+				</ul>
+			</div><!--/discounts-->
+            <div class="discounts recomended_products_index" style="display: none;">
+				<h2>Все рекомендации</h2>
+				<div class="discounts_qty">всего {{ recomended_products_count }} товар{{ recomended_products_count|choose_plural:',а,ов' }}</div>
+                <ul>
+                    {% for section in recomended_sections %}
+                        <li><a href="{{ section.get_absolute_url }}?recomended_sale=all">{{ section.name|safe }}</a></li>
+                    {% endfor %}
+				</ul>
+			</div><!--/discounts-->
+
 		</div><!--/left-->
 
 		<div class="right col">
