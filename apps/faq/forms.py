@@ -1,20 +1,12 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from faq.models import Question, Report
+from apps.faq.models import Question, QuestionCategory
 
 class QuestionForm(forms.ModelForm):
-    email = forms.EmailField(widget=forms.TextInput(attrs={'class':'active_input'}), required=True)
+    email = forms.EmailField(widget=forms.TextInput(attrs={'required':'required'}), required=True)
+    name = forms.CharField(widget=forms.TextInput(attrs={'required':'required'}), required=True)
+    question = forms.CharField(widget=forms.Textarea(attrs={'required':'required'}), required=True)
 
     class Meta:
         model = Question
-        fields = ('email', 'question',)
-
-
-class ReportForm(forms.ModelForm):
-    name = forms.CharField(widget=forms.TextInput(attrs={'class':'active_input'}), required=True)
-    city = forms.CharField(widget=forms.TextInput(attrs={'class':'active_input'}), required=False)
-    email = forms.EmailField(widget=forms.TextInput(attrs={'class':'active_input'}), required=False)
-
-    class Meta:
-        model = Report
-        fields = ('name','city','email','report',)
+        fields = ('name', 'email', 'question',)

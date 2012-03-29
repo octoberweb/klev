@@ -128,10 +128,35 @@ class Storage(models.Model):
     def get_absolute_url(self):
             return u'?storage=%d' %self.id
 
+
+class Brand(models.Model):
+    name = models.CharField(verbose_name=u'Название', max_length=100)
+    alias = models.CharField(verbose_name=u'Алиас', max_length=100, unique=True)
+    xml_name = models.CharField(verbose_name=u'Название в xml', max_length=100, unique=True)
+
+    order = models.IntegerField(verbose_name=u'Порядок сортировки',default=10)
+    show = models.BooleanField(verbose_name=u'Отображать', default=True)
+
+    objects = models.Manager() # The default manager.
+    items = VisibleObjects() # The visible objects manager.
+
+    class Meta:
+        verbose_name = _(u'brand')
+        verbose_name_plural = _(u'brands')
+        ordering = ['-order', 'name']
+
+    def __unicode__(self):
+        return self.name
+
+    def get_products(self):
+        return self.product_set.filter(show=True)
+
+
 def file_path_Product(instance, filename):
     return os.path.join('images','product',  translify(filename).replace(' ', '_') )
 class Product(models.Model):
     subcategory = models.ForeignKey(SubCategory, verbose_name=u'Подкатегория')
+    brand = models.ForeignKey(Brand, verbose_name=u'Бренд', blank=True, null=True)
     name = models.CharField(verbose_name=u'Название', max_length=400)
     xml_id = models.CharField(verbose_name=u'ID в xml', max_length=100, unique=True)
     description = models.TextField(verbose_name=u'Описание', blank=True)

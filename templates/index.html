@@ -6,17 +6,13 @@
 		<div class="left col">
 			<div class="catalog_groups">
 				<ul>
-					<li class="current rc_dark"><a href="#">Распродажа</a><div class="rc_dark_arr"></div></li>
-					<li><a href="#">Хиты продаж</a></li>
-					<li><a href="#">Рекомендации</a></li>
+					<li class="current rc_dark"><a href="#sale" rel="sale">Распродажа</a><div class="rc_dark_arr"></div></li>
+					<li><a href="#top" rel="top">Хиты продаж</a></li>
+					<li><a href="#recomended" rel="recomended">Рекомендации</a></li>
 				</ul>
 			</div><!--/catalog_groups-->
 
-			<div class="items">
-                {% for product in sale_products %}
-                    {% get_product_html product %}
-                {% endfor %}
-			</div><!--/items-->
+			{% include 'products/product_items.html' %}
 
 			<div class="discounts">
 				<h2>Все товары со скидкой</h2>

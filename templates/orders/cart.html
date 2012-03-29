@@ -3,7 +3,15 @@
 {% block main %}
 		<div class="cart_page">
             {% if is_empty %}
-                <h2 class="rc_dark">Ваша корзина пока пуста<div class="rc_dark_arr"></div></h2>
+                <h2 class="rc_dark">Ваша корзина пока пуста</h2>
+                <div class="text">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                </div>
             {% else %}
                 <h2 class="rc_dark">Ваша корзина<div class="rc_dark_arr"></div></h2>
                 <div class="cart_table">
@@ -19,7 +27,7 @@
                                             </div>
                                         </div>
                                         <div class="item_r">
-                                            <div class="item_cat"><a href="#">{{ item.product.subcategory.name }}</a></div>
+                                            <div class="item_cat"><a href="{{ item.product.subcategory.get_absolute_url }}">{{ item.product.subcategory.name }}</a></div>
                                             <h3 class="item_name"><a href="{{ item.product.get_absolute_url }}">{{ item.product.name }}</a><span>Simms</span></h3>
                                         </div>
                                         <div class="cl"></div>
@@ -35,7 +43,7 @@
                         <tr>
                             <td colspan="3"></td>
                             <td class="cart_sum">
-                                <div class="total_sum_in"><span class="cart_total">Итого:</span> <span>4 890</span> руб.</div>
+                                <div class="total_sum_in"><span class="cart_total">Итого:</span> <span class="cart_str_total">{{ cart_str_total }}</span> руб.</div>
                                 <div><input type="submit" class="btn_green" value="Оформить покупку" /></div>
                             </td>
                             <td></td>

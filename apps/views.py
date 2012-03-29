@@ -28,7 +28,7 @@ def index(request):
 
 
 from xml.etree import ElementTree as ET
-from apps.products.models import Property, Product, Section, Category, SubCategory, Param,Storage
+from apps.products.models import Property, Product, Section, Category, SubCategory, Param,Storage, Brand
 from decimal import Decimal, InvalidOperation
 from pytils.translit import translify
 
@@ -79,6 +79,7 @@ def import_xml(request):
             category_value = False
             subcategory_value = False
             product_name = False
+            product_brand = False
 
             prop_list = []
             for value_prop in values_prop:
@@ -95,6 +96,10 @@ def import_xml(request):
                     subcategory_value = value
                 elif prop_ID == u'ПолноеНаименование': #Подвид товара (Подкатегория)
                     product_name = value
+                elif prop_ID == u'Ц0076': #Бренд
+                    product_brand = value
+                elif prop_ID == u'КЕ002': #Старая цена
+                    continue
                 else:
                     prop_list.append([prop_ID, value])
 
@@ -109,7 +114,7 @@ def import_xml(request):
                 except Section.DoesNotExist:
                     section = Section.objects.select_related().create(
                         name=section_value,
-                        alias=section_value.replace(u' ', '_'),
+                        alias=section_value.replace(u' ', u'_').replace(u',', u''),
                         xml_name=section_value
                     )
                 try:
@@ -118,7 +123,7 @@ def import_xml(request):
                     category = Category.objects.select_related().create(
                         section=section,
                         name=category_value,
-                        alias=category_value.replace(u' ', '_'),
+                        alias=category_value.replace(u' ', u'_').replace(u',', u''),
                         xml_name=category_value
                     )
 
@@ -128,12 +133,25 @@ def import_xml(request):
                     subcategory = SubCategory.objects.select_related().create(
                         category=category,
                         name=subcategory_value,
-                        alias=subcategory_value.replace(u' ', '_'),
+                        alias=subcategory_value.replace(u' ', u'_').replace(u',', u''),
                         xml_name=subcategory_value
                     )
                 keywords = u'%s %s' % (product_name, subcategory.name)
+
+                if product_brand:
+                    try:
+                        brand = Brand.objects.get(xml_name=product_brand)
+                    except Brand.DoesNotExist:
+                        brand = Brand.objects.create(
+                            name=product_brand,
+                            alias=product_brand.replace(u' ', u'_').replace(u',', u''),
+                            xml_name=product_brand
+                        )
+                else:
+                    brand = None
                 product = Product.objects.create(
                     subcategory=subcategory,
+                    brand=brand,
                     name=product_name,
                     xml_id=prod_ID,
                     keywords=keywords
@@ -153,7 +171,7 @@ def import_xml(request):
                         )
 
     package = root.find(u'ПакетПредложений')
-    if package:
+    if len(package):
         proposals = package.findall(u'Предложение')
 
         for proposal in proposals:
@@ -185,7 +203,10 @@ def import_xml(request):
             try:
                 storage = Storage.objects.get(name=storage_xml)
             except Storage.DoesNotExist:
-                storage = Storage.objects.create(name=storage_xml)
+                storage = Storage.objects.create(
+                    name=storage_xml,
+                    show=False
+                )
 
 
             product_price = Decimal(product_price).quantize(Decimal(10) ** -2)

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load pagination_tags products_extras %}
+
+{% block main %}
+    {% include 'products/submenu_categories.html' %}
+    
+    <div class="left col">
+        
+        <div class="catalog_sort">
+            <div class="current_sort">Товары выводятся без сортировки.</div>
+            <div>Можно выводить сначала <a href="#">дешевые</a> или <a href="#">дорогие</a>, и даже <span class="sort_price_lnk">установить диапозон цен</span></div>
+        </div>
+        
+        <div class="items">
+            {% autopaginate products 10 %}
+            {% for product in products %}
+                {% get_product_html product %}
+            {% endfor %}
+
+            {% paginate products_count %}
+
+        </div><!--/items-->
+    </div><!--/left-->
+    
+    <div class="right col">
+        <div class="catalog_filters">
+            {% if storages %}
+                <div class="filter">
+                    <h2>Наличие в магазинах</h2>
+                    <ul>
+                        {% getvars storages 'storage' %}
+                    </ul>
+                </div>
+            {% endif %}
+
+        </div><!--/catalog_filter-->
+        
+        {% comment %}<div class="sale">
+            <h2>Распродажа</h2>
+            <div class="sale_hits">посмотреть <a href="#">Хиты продаж</a></div>
+            <div class="sale_recomend">или <a href="#">Рекомендации</a></div>
+            <div class="sale_items">
+                {% for product in sale_products %}
+                    {% get_product_html product 'False'%}
+                {% endfor %}
+
+            </div><!--/sale_items-->
+            <div class="sale_all">
+                {% if category %}
+                    <a href="#">Все товары с рапродажей в «{{ category.name }}»</a>
+                {% else %}
+                    <a href="#">Все товары с рапродажей в «{{ section.name|safe }}»</a>
+                {% endif %}
+            </div>
+        </div>{% endcomment %}
+    </div><!--/right-->
+{% endblock %}

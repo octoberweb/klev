@@ -41,8 +41,8 @@
 		</div><!--/menu_shop-->
 		
 		<div class="search">
-			<form class="search_form" method="post" action="">
-				<div class="search_input"><input type="text" placeholder="Поиск в каталоге товаров" /></div>
+			<form class="search_form" method="get" action="/search/">
+				<div class="search_input"><input type="text" placeholder="Поиск в каталоге товаров" name="q" required="required"/></div>
 				<div class="search_submit"><input type="submit" value="Найти" /></div>
 				<div class="cl"></div>
 			</form>
@@ -50,18 +50,21 @@
 		</div><!--/search-->
 		
         {% get_cart user sessionid %}
-				
-		<div class="menu">
-            <ul>
-                {% for section in sections %}
-                    <li{% ifequal section_alias section.alias  %} class="current"{% endifequal %}>
-                        <a href="{{ section.get_absolute_url }}"><img src="{{ section.image.url }}" width="106" height="122" alt="{{ section.name|safe }}" />
-                            <span>{{ section.name|safe }}</span>
-                        </a>
-                    </li>
-                {% endfor %}
-			</ul>
-		</div><!--/menu-->
+
+        {% block menu %}
+            <div class="menu">
+                <ul>
+                    {% for section in sections %}
+                        <li{% ifequal section_alias section.alias  %} class="current"{% endifequal %}>
+                            <a href="{{ section.get_absolute_url }}"><img src="{{ section.image.url }}" width="106" height="122" alt="{{ section.name|safe }}" />
+                                <span>{{ section.name|safe }}</span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div><!--/menu-->
+        {% endblock %}
+
 		
 	</div>
     <!--/HEADER-->

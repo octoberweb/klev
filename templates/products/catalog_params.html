@@ -1,0 +1,10 @@
+<li{% if not param_value %} class="current"{% endif %}><a href="?{{ getvars_all }}">Все</a></li>
+{% if props %}
+    {% for item in objects %}
+        <li{% ifequal param_value item.value %} class="current"{% endifequal %}><a href="?{{ param }}={{ item.value }}{{ getvars }}">{{ item.value }}</a></li>
+    {% endfor %}
+{% else %}
+    {% for item in objects %}
+        <li{% ifequal param_value item.id %} class="current"{% endifequal %}><a href="?{{ param }}={{ item.id }}{{ getvars }}">{{ item.name }}</a></li>
+    {% endfor %}
+{% endif %}

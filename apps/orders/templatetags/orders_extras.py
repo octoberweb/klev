@@ -23,12 +23,15 @@ def get_cart(user, sessionid):
             cart = False
 
     is_empty = True
-    cart_products_count = cart.get_products_count()
-    cart_total = cart.get_str_total()
+    cart_total = 0
+    cart_products_count = 0
     cart_products_text = u''
-    if cart_products_count:
-        is_empty = False
-        cart_products_text = u'товар%s' %(choose_plural(cart_products_count,(u'',u'а',u'ов')))
+    if cart:
+        cart_products_count = cart.get_products_count()
+        if cart_products_count:
+            cart_total = cart.get_str_total()
+            is_empty = False
+            cart_products_text = u'товар%s' %(choose_plural(cart_products_count,(u'',u'а',u'ов')))
     return {
         'is_empty':is_empty,
         'cart_products_count':cart_products_count,

@@ -2,6 +2,20 @@
 
 {% load pagination_tags products_extras %}
 
+{% block menu %}
+    <div class="menu">
+        <ul>
+            {% for section in sections %}
+                <li{% ifequal section_alias section.alias  %} class="current"{% endifequal %}>
+                    <a href="#" rel="{{ section.alias }}"><img src="{{ section.image.url }}" width="106" height="122" alt="{{ section.name|safe }}" />
+                        <span>{{ section.name|safe }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div><!--/menu-->
+{% endblock %}
+
 {% block main %}
     {% include 'products/submenu_categories.html' %}
     
@@ -9,7 +23,7 @@
         
         <div class="catalog_sort">
             <div class="current_sort">Товары выводятся без сортировки.</div>
-            <div>Можно выводить сначала <a href="#">дешевые</a> или <a href="#">дорогие</a>, и даже <span class="sort_price_lnk">установить диапозон цен</span></div>
+            <div>Можно выводить сначала <a href="{% getvars_simple 'sort' 'asc' %}">дешевые</a> или <a href="{% getvars_simple 'sort' 'desc' %}">дорогие</a>, и даже <span class="sort_price_lnk">установить диапозон цен</span></div>
         </div>
         
         <div class="items">
@@ -55,22 +69,41 @@
         </div><!--/catalog_filter-->
         
         <div class="sale">
-            <h2>Распродажа</h2>
-            <div class="sale_hits">посмотреть <a href="#">Хиты продаж</a></div>
-            <div class="sale_recomend">или <a href="#">Рекомендации</a></div>
-            <div class="sale_items">
+            <h2 class="show_sale_products">Распродажа</h2>
+            <div class="sale_hits">{% comment %}посмотреть{% endcomment %} <a href="#" class="show_top_products">Хиты продаж</a></div>
+            <div class="sale_recomend">или <a href="#" class="show_recomended_products">Рекомендации</a></div>
+            <div class="sale_items sale_products">
                 {% for product in sale_products %}
                     {% get_product_html product 'False'%}
                 {% endfor %}
 
             </div><!--/sale_items-->
-            <div class="sale_all">
-                {% if category %}
-                    <a href="#">Все товары с рапродажей в «{{ category.name }}»</a>
-                {% else %}
-                    <a href="#">Все товары с рапродажей в «{{ section.name|safe }}»</a>
-                {% endif %}
-            </div>
+            <div class="sale_items top_products" style="display: none;">
+                {% for product in top_products %}
+                    {% get_product_html product 'False'%}
+                {% endfor %}
+
+            </div><!--/sale_items-->
+            <div class="sale_items recomended_products" style="display: none;">
+                {% for product in recomended_products %}
+                    {% get_product_html product 'False' %}
+                {% endfor %}
+
+            </div><!--/sale_items-->
+
+
+            {% if category %}
+                <div class="sale_all sale_products_all">
+                        <a href="?rasprodazha=Распродажа">Все товары с рапродажей в «{{ category.name }}»</a>
+                </div>
+                <div class="sale_all top_products_all" style="display: none;">
+                        <a href="?top_sale=all">Все хиты продаж в «{{ category.name }}»</a>
+                </div>
+                <div class="sale_all recomended_products_all" style="display: none;">
+                        <a href="?recomended_sale=all">Все рекомендации в «{{ category.name }}»</a>
+                </div>
+
+            {% endif %}
         </div>
     </div><!--/right-->
 {% endblock %}

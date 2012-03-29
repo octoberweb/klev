@@ -1,0 +1,8 @@
+msgid "Distributors"
+msgstr "Новости"
+
+msgid "distributors"
+msgstr "поставщики"
+
+msgid "distributor"
+msgstr "поставщик"

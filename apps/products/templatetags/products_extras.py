@@ -45,11 +45,11 @@ def getvars(context, objects, param, props='not_props' ):
         len_getvars_keys = len(keys)
 
         if len_getvars_keys > 0:
-            to_return['getvars'] = "&%s" % getvars.urlencode()
             if param=='subcategory':
                 for key in keys:
                     if key!='storage':
                         del getvars[key]
+            to_return['getvars'] = "&%s" % getvars.urlencode()
             to_return['getvars_all'] = "%s" % getvars.urlencode()
 
         else:
@@ -65,3 +65,25 @@ def getvars_properties(context, property, products, property_alias):
         'property_alias':property_alias,
         'request':context['request']
     }
+
+@register.simple_tag(takes_context=True)
+def getvars_simple(context,param, direction):
+    if 'request' in context:
+        getvars = context['request'].GET.copy()
+        if param in getvars:
+            param_value = getvars[param]
+            del getvars[param]
+
+        keys = getvars.keys()
+        len_getvars_keys = len(keys)
+
+        if len_getvars_keys > 0:
+            getvars = u"&%s" % getvars.urlencode()
+        else:
+            getvars = u''
+
+        return u'?%s=%s%s' %(param, direction, getvars)
+    else:
+        return  u''
+
+

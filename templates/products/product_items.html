@@ -1,0 +1,6 @@
+{% load products_extras %}
+<div class="items">
+    {% for product in sale_products %}
+        {% get_product_html product %}
+    {% endfor %}
+</div><!--/items-->

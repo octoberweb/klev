@@ -20,6 +20,7 @@ class Banners(models.Model):
     #left = models.BooleanField(verbose_name=u'Баннер под меню', default=False)
     #right = models.BooleanField(verbose_name=u'Баннер на главной справа', default=False)
     flash = models.BooleanField(verbose_name=u'Flash', default=False)
+    new_tab = models.BooleanField(verbose_name=u'Открывать на новой странице', default=False)
     show = models.BooleanField(verbose_name=u'Отображать', default=True)
     #order = models.IntegerField(verbose_name=u'Порядок',max_length=3, default=10)
 
